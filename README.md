@@ -1,3 +1,9 @@
+```bash
+git clone https://github.com/lorisCocco/bdoe616.git
+npm i
+npm start
+```
+
 #Routes
 
 ```ts
