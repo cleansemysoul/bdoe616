@@ -4,6 +4,6 @@ const contact = require("./routes/contact");
 
 module.exports = (app) => {
   app.use("/auth", auth);
-  app.use("/agenda", agenda);
+  app.use("/agendas", agenda);
   app.use("/contacts", contact);
 };

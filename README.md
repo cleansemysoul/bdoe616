@@ -4,13 +4,17 @@ npm i
 npm start
 ```
 
+```ts
+const TEST_USER = "VlMta9kiJKpppr5cFnMh";
+```
+
 #Routes
 
 ```ts
 const API_URL = "http://localhost:8000";
 ```
 
-###Auth
+##Auth
 
 ```ts
 // POST
@@ -31,6 +35,23 @@ interface LogoutObject = {
 }
 
 // POST
+// Create
+const URL = `${API_URL}/auth/create`;
+
+interface CreateObject = {
+  userName: string;
+}
+
+// PATCH
+// Create
+const URL = `${API_URL}/auth/update`;
+
+interface UpdateObject = {
+  id: string;
+  username: string;
+}
+
+// POST
 // Delete user's account
 const URL = `${API_URL}/auth/delete`;
 
@@ -40,20 +61,36 @@ interface DeleteObject = {
 
 ```
 
-###Agenda
+##Agenda
 
 ```ts
 // GET
-// Return user agenda
-const URL = `${API_URL}/agenda`;
+// Return user agenda by id
+const URL = `${API_URL}/agendas/:id`;
+
+// Post
+// Add an event to the user's agenda
+const URL = `${API_URL}/agendas`;
+
+interface ContactObject = {
+  belongsTo: string;
+  date: TIMESTAMP;
+  title: string;
+}
+
+const ContactObject = {
+  belongsTo: TEST_USER,
+  title: "Mon nouvel event 3",
+  date: "Thu Jun 23 2022 16:49:40 GMT+0200 (heure d’été d’Europe centrale)"
+}
 ```
 
-###Contact
+##Contact
 
 ```ts
 // GET
-// Return a list of all contacts
-const URL = `${API_URL}/contacts`;
+// Return a list of all contacts by user id
+const URL = `${API_URL}/contacts/users/:id`;
 
 // Return contact by id
 const URL = `${API_URL}/contacts/:id`;
@@ -62,40 +99,48 @@ const URL = `${API_URL}/contacts/:id`;
 // Add contact
 const URL = `${API_URL}/contacts`:
 
-interface Coordinates = {
-  address : string[];
-  phone : string[];
-  email : string[];
-  websites : string[];
+interface ContactObject = {
+  belongsTo: string;
+  name: string;
+  address: string[];
+  phone: string[];
+  email: string[];
+  websites: string[];
 }
 
-interface AddContactObject = {
-  name:string;
-  coordinates: Coordinates;
+const ExampleObject = {
+  belongsTo: TEST_USER,
+  name: "A",
+  address: ["B", "C"],
+  phone: ["0612345678"],
+  email: ["email@test.test"],
+  website: ["rue de paris"]
 }
 
 // PATCH
 // Modify a contact's informations by contact's id
 const URL = `${API_URL}/contacts`:
 
-interface Coordinates = {
-  address : string[];
-  phone : string[];
-  email : string[];
-  websites : string[];
-}
-
-interface EditContactObject = {
+interface ContactObject = {
   id: number;
-  name:string;
-  coordinates: Coordinates;
+  name: string;
+  address: string[];
+  phone: string[];
+  email: string[];
+  websites: string[];
 }
 
-// Delete
-// Delete a contact from user's contact by contact's id
-const URL = `${API_URL}/contacts`:
-
-interface DeleteObject = {
-  id: number;
+const ExampleObject = {
+  id: "9pQfFSqoepzracxZYwFk",
+  name: "B",
+  address: [],
+  phone: [],
+  email: [],
+  website: ["test.com"]
 }
+
+// DELETE
+// Delete a contact by contact's id
+const URL = `${API_URL}/contacts/:id`:
+
 ```
